@@ -33,6 +33,8 @@ class Music:
         res = requests.post(url, headers=self.headers, data=data).json()
         # pprint(res)
         tb = pt.PrettyTable()
+        # tb.align = 'c'
+        # tb.padding_width = 1
         tb.field_names = ['序号', '歌名', '歌曲id', '歌手']
         song_list = res['result']['songs']
         n = 0
@@ -42,7 +44,11 @@ class Music:
             song_num = n
             song_name = each['name']
             song_id = each['id']
-            singer = each['ar'][0]['name']
+            singers = each['ar']
+            singer = []
+            for i in range(len(singers)):
+                singer.append(singers[i]['name'])
+            singer = '/'.join(singer)
             each_list = [song_num, song_name, song_id, singer]
             tb.add_row(each_list)
             song_dict[song_num] = [song_name, song_id]
