@@ -76,12 +76,15 @@ class Music:
                     if each in song_name:
                         song_name = song_name.replace(each, ' ')
 
-                async with session.get(song_url) as song:
-                    async with aiofiles.open(f'music/{song_name}{song_id}.m4a', 'wb') as f:
-                        # .read()是无编码的格式，区别于requests的content
-                        # 注意！两个await
-                        await f.write(await song.read())
-                        print(song_name, '下载完成！')
+                try:
+                    async with session.get(song_url) as song:
+                        async with aiofiles.open(f'music/{song_name}{song_id}.m4a', 'wb') as f:
+                            # .read()是无编码的格式，区别于requests的content
+                            # 注意！两个await
+                            await f.write(await song.read())
+                            print(song_name, '下载完成！')
+                except:
+                    print(song_name, '不支持下载！')
 
     def main(self):
         name = input('请输入歌名：')
