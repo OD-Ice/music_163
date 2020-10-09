@@ -5,7 +5,7 @@
 + 可以搜索网易云音乐上面的歌曲并生产列表  
 ![Image](https://github.com/OD-Ice/music_163/blob/master/img/music.PNG)
 + 从列表中选择歌曲序号可进行下载
-+ 版权受限音乐不支持下载
++ 版权受限不能听的音乐不支持下载
 
 ## 更新日志
 
