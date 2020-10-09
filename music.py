@@ -1,10 +1,11 @@
 import execjs
 import requests
-# from pprint import pprint
+from pprint import pprint
 import prettytable as pt
 import asyncio
 import aiohttp
 import aiofiles
+
 
 class Music:
     def __init__(self):
@@ -30,7 +31,7 @@ class Music:
 
     def get_id(self, name, n):
         url = 'https://music.163.com/weapi/cloudsearch/get/web?csrf_token='
-        c = self.get_enc(keyword=name , n=n)
+        c = self.get_enc(keyword=name, n=n)
         task = asyncio.ensure_future(c)
         loop = asyncio.get_event_loop()
         loop.run_until_complete(task)
@@ -40,7 +41,7 @@ class Music:
             'encSecKey': result['encSecKey']
         }
         res = requests.post(url, headers=self.headers, data=data).json()
-        # pprint(res)
+        pprint(res)
         tb = pt.PrettyTable()
         # tb.align = 'c'
         # tb.padding_width = 1
@@ -102,9 +103,9 @@ class Music:
                     break
                 else:
                     if num in ['n', 'N']:
-                        n += 30
+                        n += 20
                     else:
-                        n -= 30
+                        n -= 20
 
             tasks1 = []
             tasks2 = []
@@ -153,6 +154,7 @@ class Music:
                 flag = True
             else:
                 flag = False
+
 
 if __name__ == '__main__':
     music = Music()
